@@ -1,0 +1,31 @@
+# Python
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Instance folder (contains configuration, database, etc.)
+instance/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env.local

@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  padding: 20px;
+  color: black;
+}
+
+h1, h2, p {
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 10px;
+  height: 30px;
+}
+
+input {
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+  background-color: #109e7b;
+  color: white;
+  border: none;
+  cursor: pointer;
+}

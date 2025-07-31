@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Value Extractor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <h1>Enter a URL to extract text</h1>
+    <form method="post">
+      <input type="text" name="url" placeholder="https://example.com" style="width:300px;">
+      <input type="submit" value="Extract">
+    </form>
+    {% if text %}
+      <h2>Extracted Text:</h2>
+      <pre style="white-space: pre-wrap;">{{ text }}</pre>
+    {% endif %}
+    {% if url_string %}
+      <h2>Extracted URL:</h2>
+      <pre style="white-space: pre-wrap;">{{ url_string }}</pre>
+    {% endif %}
+    {% if message %}
+      <h2>Message:</h2>
+      <pre style="white-space: pre-wrap;">{{ message }}</pre>
+    {% endif %}
+  </body>
+</html>
