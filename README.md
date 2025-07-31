@@ -32,7 +32,7 @@ html-parser/
 
 1. **Clone the repository:**
    ```bash
-   git clone <repo-url>
+   git clone git@github.com:erinmyoung/html-parser.git
    cd html-parser
    ```
 2. **Create and activate a virtual environment (recommended):**
