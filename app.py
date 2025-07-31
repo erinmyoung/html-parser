@@ -1,5 +1,5 @@
-from flask import Flask, request, render_template
 import requests
+from flask import Flask, request, render_template
 from bs4 import BeautifulSoup
 from html import escape
 
@@ -21,6 +21,7 @@ def index():
             for tag in soup(['script', 'style', 'iframe', 'object', 'embed']):
                 tag.decompose()
 
+            # Extract text from the soup
             b_tags = soup.find_all('b', class_="ref")
             if b_tags:
                 for b in b_tags:
@@ -33,7 +34,13 @@ def index():
                     hidden_soup = BeautifulSoup(hidden_url_response.text, 'lxml')
                     message = escape(hidden_soup.get_text(separator=' ', strip=True))
             else:
-                text = escape(soup.get_text(separator=' ', strip=True))
+                # Add fallback for when no <b> tags are found
+                content = escape(soup.get_text(separator=' ', strip=True))
+                max_length = 2000
+                if len(content) > max_length:
+                    text = content[:max_length] + '...'
+                else:
+                    text = content
 
         except Exception as e:
             url_string = f"Error fetching or parsing the URL: {e}"
