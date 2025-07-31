@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 import requests
 from bs4 import BeautifulSoup
+from html import escape
 
 app = Flask(__name__)
 
@@ -15,10 +16,10 @@ def index():
         try:
             response = requests.get(url, timeout=10)
             response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
-            # Remove script and style elements
-            for script in soup(['script', 'style']):
-                script.decompose()
+            soup = BeautifulSoup(response.text, 'lxml')
+            # Remove unsupported elements
+            for tag in soup(['script', 'style', 'iframe', 'object', 'embed']):
+                tag.decompose()
 
             b_tags = soup.find_all('b', class_="ref")
             if b_tags:
@@ -29,10 +30,10 @@ def index():
                 url_string = ''.join(url_chars)
                 if url_string:
                     hidden_url_response = requests.get(url_string, timeout=10)
-                    hidden_soup = BeautifulSoup(hidden_url_response.text, 'html.parser')
-                    message = hidden_soup.get_text(separator=' ', strip=True)
+                    hidden_soup = BeautifulSoup(hidden_url_response.text, 'lxml')
+                    message = escape(hidden_soup.get_text(separator=' ', strip=True))
             else:
-                text = soup.get_text(separator=' ', strip=True)
+                text = escape(soup.get_text(separator=' ', strip=True))
 
         except Exception as e:
             url_string = f"Error fetching or parsing the URL: {e}"
